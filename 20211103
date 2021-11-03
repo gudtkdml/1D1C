@@ -1,0 +1,30 @@
+//Singleton 디자인 패턴
+//MySingleton 클래스 생성
+public Class MySingleton
+  
+  //비공개 멤버
+  private Shared m_Instance As MySingleton //MySingleton 데이터형 선언
+  private Shared m_TimeOfBirth As String
+  
+  //비공개 New 생성자
+  private Sub New()
+    console.WriteLine("Creating Singleton at"&Now.ToLongTimeString)
+    m_TimeOfBirth = Now.ToLongTimeString
+  End Sub
+  
+  //인스턴스를 생성하는 공개 메서드
+  public Shared Funciton GetInstance() As MySingleton
+    If m_Instance Is Nothing Then
+      m_Instance = New MySingleton()
+    End If
+    Return m_Instance
+  End Function
+  
+  //공개 속성
+  public ReadOnly Property TimeOfBirth() As String
+    Get
+      Return m_TimeOfBirth
+    End Get
+   End Property
+End Class
+
