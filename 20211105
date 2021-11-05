@@ -50,5 +50,5 @@ public class MySafeSingleton
   End Property
 End class
 
-//Abstract Factory 패턴
+//추상 
 
