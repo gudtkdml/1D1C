@@ -1,0 +1,54 @@
+//Singleton 패턴
+public class MySingleton
+  //비공개멤버
+  private Shared m_Instance As Mysingleton
+  private Shared m-TimeOfBirth As String
+  //비공개New생성자
+  private Sub New()
+    console.writeLine("Creating Singleton at"& Now.ToLongTimeString)
+    m_TimeOfBirth = Now.ToLongTimeString
+  End Sub
+  //인스턴스를 생성하는 공개 메서드
+  public Shared Function GetInstance() As MySingleton
+    IF m_Instance Is Nothing Then
+    m_Instance = New MySingleTon()
+    Return m_Instance
+  End Function
+  //공개속성
+  public ReadOnly Property TimeOfBirth() As String
+    Get
+      Return m_TimeOfBirth
+    End Get
+  End Property
+End class
+
+//다중스레드에서의 Singleton 패턴
+public class MySafeSingleton
+  //비공개멤버
+  private Shared m_Instance As Mysingleton
+  private Shared m_TimeOfBirth As String
+  private Shared m_Mutex As New System.Threading.Mutex()
+  //비공개New생성자
+  private Sub New()
+    console.writeLine("Creating Singleton at"& Now.ToLongTimeString)
+    m_TimeOfBirth = Now.ToLongTimeString
+  End Sub
+  //인스턴스를 생성하는 공개 메서드
+  public Shared Function GetInstance() As MySingleton
+    m_Mutex.WaintOne()
+    IF m_Instance Is Nothing Then
+    m_Instance = New MySingleTon()
+    End If
+    m_Mutex.ReleaseMutex()
+    Return m_Instance
+  End Function
+  //공개속성
+  public ReadOnly Property TimeOfBirth() As String
+    Get
+      Return m_TimeOfBirth
+    End Get
+  End Property
+End class
+
+//Abstract Factory 패턴
+
